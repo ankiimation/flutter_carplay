@@ -14,10 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
 
         window = UIWindow(windowScene: windowScene)
-        let flutterEngine = FlutterEngine(name: "SceneDelegateEngine")
-        flutterEngine.run()
-        GeneratedPluginRegistrant.register(with: flutterEngine)
-        let controller = FlutterViewController.init(engine: flutterEngine, nibName: nil, bundle: nil)
+        let controller = FlutterViewController.init(engine: AppDelegate.flutterEngine, nibName: nil, bundle: nil)
         window?.rootViewController = controller
         window?.makeKeyAndVisible()
     }

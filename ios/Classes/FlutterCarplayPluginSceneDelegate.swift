@@ -55,8 +55,10 @@ class FlutterCarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelega
     })
   }
   
-  func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene,
-                                didConnect interfaceController: CPInterfaceController) {
+    func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController, to window: CPWindow) {
+      print("CP connected")
+        
+        interfaceController.setRootTemplate(CPTabBarTemplate(templates: [CPListTemplate(title: "Test", sections: [])]), animated: false, completion: nil)
     FlutterCarPlaySceneDelegate.interfaceController = interfaceController
     
     SwiftFlutterCarplayPlugin.onCarplayConnectionChange(status: FCPConnectionTypes.connected)

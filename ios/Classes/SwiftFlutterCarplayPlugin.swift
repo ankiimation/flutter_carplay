@@ -10,6 +10,7 @@ import CarPlay
 
 @available(iOS 14.0, *)
 public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
+    static var channel: FlutterMethodChannel?
   private static var streamHandler: FCPStreamHandlerPlugin?
   private(set) static var registrar: FlutterPluginRegistrar?
   private static var objcRootTemplate: FCPRootTemplate?
@@ -27,17 +28,19 @@ public class SwiftFlutterCarplayPlugin: NSObject, FlutterPlugin {
   }
   
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: makeFCPChannelId(event: ""),
+      SwiftFlutterCarplayPlugin.channel = FlutterMethodChannel(name: makeFCPChannelId(event: ""),
                                        binaryMessenger: registrar.messenger())
     let instance = SwiftFlutterCarplayPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
+      registrar.addMethodCallDelegate(instance, channel: SwiftFlutterCarplayPlugin.channel!)
     self.registrar = registrar
     
     self.streamHandler = FCPStreamHandlerPlugin(registrar: registrar)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+      print("[CP METHOD] \(call.method)")
     switch call.method {
+
     case FCPChannelTypes.setRootTemplate:
       guard let args = call.arguments as? [String : Any] else {
         result(false)

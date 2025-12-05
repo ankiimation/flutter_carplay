@@ -5,7 +5,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 
+final FlutterCarplay _flutterCarplay = FlutterCarplay();
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -18,12 +21,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   CPConnectionStatusTypes connectionStatus = CPConnectionStatusTypes.unknown;
-  final FlutterCarplay _flutterCarplay = FlutterCarplay();
 
   @override
   void initState() {
     super.initState();
-
     final List<CPListSection> section1Items = [];
     section1Items.add(CPListSection(
       items: [
@@ -89,7 +90,7 @@ class _MyAppState extends State<MyApp> {
           text: "Alert",
           detailText: "Action template that the user can perform on an alert",
           onPress: (complete, self) {
-            showAlert();
+            // showAlert();
             complete();
           },
         ),
@@ -97,7 +98,7 @@ class _MyAppState extends State<MyApp> {
           text: "Grid Template",
           detailText: "A template that displays and manages a grid of items",
           onPress: (complete, self) {
-            openGridTemplate();
+            // openGridTemplate();
             complete();
           },
         ),
@@ -105,7 +106,7 @@ class _MyAppState extends State<MyApp> {
           text: "Action Sheet",
           detailText: "A template that displays a modal action sheet",
           onPress: (complete, self) {
-            showActionSheet();
+            // showActionSheet();
             complete();
           },
         ),
@@ -113,7 +114,7 @@ class _MyAppState extends State<MyApp> {
           text: "List Template",
           detailText: "Displays and manages a list of items",
           onPress: (complete, self) {
-            openListTemplate();
+            //  openListTemplate();
             complete();
           },
         ),
@@ -121,7 +122,7 @@ class _MyAppState extends State<MyApp> {
           text: "Information Template",
           detailText: "Displays a list of items and up to three actions",
           onPress: (complete, self) {
-            openInformationTemplate();
+            //  openInformationTemplate();
             complete();
           },
         ),
@@ -129,7 +130,7 @@ class _MyAppState extends State<MyApp> {
           text: "Point Of Interest Template",
           detailText: "Displays a Map with points of interest.",
           onPress: (complete, self) {
-            openPoiTemplate();
+            //   openPoiTemplate();
             complete();
           },
         ),
@@ -166,7 +167,7 @@ class _MyAppState extends State<MyApp> {
       ),
       animated: true,
     );
-
+    _flutterCarplay.forceUpdateRootTemplate();
     _flutterCarplay.addListenerOnConnectionChange(onCarplayConnectionChange);
   }
 
@@ -363,8 +364,8 @@ class _MyAppState extends State<MyApp> {
               }),
         ],
             informationItems: [
-              CPInformationItem(title: "Item title 1", detail: "detail 1"),
-              CPInformationItem(title: "Item title 2", detail: "detail 2"),
+          CPInformationItem(title: "Item title 1", detail: "detail 1"),
+          CPInformationItem(title: "Item title 2", detail: "detail 2"),
         ]));
   }
 
